@@ -13,10 +13,12 @@ jobs:
 
       - name: Unzip newest project zip
         run: |
+          ls -la
           ZIP=$(ls dual_stock_chart_v*.zip | sort -V | tail -1)
           echo "Using $ZIP"
           mkdir app
           unzip -q "$ZIP" -d app
+          ls -la app
 
       - uses: actions/setup-java@v4
         with:
@@ -49,7 +51,17 @@ jobs:
         working-directory: app
         run: flutter build apk --release
 
-      - uses: actions/upload-artifact@v4
+      - name: Show built APK
+        run: |
+          find app/build -name "*.apk" -print
+          ls -la app/build/app/outputs/flutter-apk/
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: dual-stock-chart-android-apk
-          path: app/build/ap
+          path: app/build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 30
+
+# END OF FILE
