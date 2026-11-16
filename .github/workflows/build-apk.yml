@@ -10,32 +10,41 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Unzip newest project zip
+      - name: Find and extract latest source ZIP
         run: |
-          ls -la
-          ZIP=$(ls dual_stock_chart_v*.zip | sort -V | tail -1)
-          echo "Using $ZIP"
-          mkdir app
+          set -e
+          ZIP=$(find . -maxdepth 1 -type f -name 'dual_stock_chart_v*_source.zip' | sort -V | tail -n 1)
+          if [ -z "$ZIP" ]; then
+            echo "找不到 dual_stock_chart_v*_source.zip，请把源码 ZIP 上传到仓库根目录。"
+            exit 1
+          fi
+          echo "Using source archive: $ZIP"
+          mkdir -p app
           unzip -q "$ZIP" -d app
-          ls -la app
+          test -f app/pubspec.yaml
+          test -d app/lib
+          echo "Source files extracted successfully."
 
-      - uses: actions/setup-java@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - uses: subosito/flutter-action@v2
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
 
-      - name: Generate Android files
+      - name: Generate Android project files
         working-directory: app
         run: flutter create . --platforms=android --project-name dual_stock_chart --org com.dualstock
 
-      - name: Patch manifest
+      - name: Configure Android app
         working-directory: app
         run: |
           MANIFEST=android/app/src/main/AndroidManifest.xml
@@ -44,7 +53,7 @@ jobs:
           fi
           sed -i 's#android:label="[^"]*"#android:label="双线股票分析"#' "$MANIFEST"
 
-      - name: Install dependencies
+      - name: Install Flutter dependencies
         working-directory: app
         run: flutter pub get
 
@@ -52,17 +61,10 @@ jobs:
         working-directory: app
         run: flutter build apk --release
 
-      - name: Show built APK
-        run: |
-          find app/build -name "*.apk" -print
-          ls -la app/build/app/outputs/flutter-apk/
-
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dual-stock-chart-android-apk
+          name: dual-stock-chart-v0.9-android-apk
           path: app/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
-
-# END OF FILE
