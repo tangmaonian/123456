@@ -15,44 +15,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Upload this ZIP to the repository root.
       - name: Extract Flutter source ZIP
         shell: bash
         run: |
           set -euo pipefail
-
-          ZIP="dual_stock_chart_v1.5.2_source.zip"
-
+          ZIP="dual_stock_chart_v1.6.0_source.zip"
           if [ ! -f "$ZIP" ]; then
             echo "::error::Cannot find $ZIP in the repository root."
             exit 1
           fi
 
           rm -rf app source_unpacked
-          mkdir -p source_unpacked
+          mkdir -p source_unpacked app
           unzip -q "$ZIP" -d source_unpacked
 
           if [ -f source_unpacked/pubspec.yaml ]; then
-            mkdir -p app
             cp -a source_unpacked/. app/
           else
             PUBSPEC="$(find source_unpacked -mindepth 2 -maxdepth 4 -type f -name pubspec.yaml | head -n 1)"
             if [ -z "$PUBSPEC" ]; then
               echo "::error::pubspec.yaml was not found inside the ZIP."
-              find source_unpacked -maxdepth 4 -type f | head -100
               exit 1
             fi
             PROJECT_DIR="$(dirname "$PUBSPEC")"
-            mkdir -p app
             cp -a "$PROJECT_DIR"/. app/
           fi
 
-          echo "Flutter project files:"
-          ls -la app
-
           test -f app/pubspec.yaml
           test -f app/lib/main.dart
-          test -f app/lib/ui/search_sheet.dart
+          test -f app/lib/data/auto_source.dart
+          test -f app/lib/data/minute_service.dart
+          test -f app/lib/ui/chart_screen.dart
           test -f app/lib/ui/stock_pages.dart
 
       - name: Set up Java
@@ -77,19 +70,14 @@ jobs:
         run: |
           set -euo pipefail
           MANIFEST="android/app/src/main/AndroidManifest.xml"
-
           if ! grep -q 'android.permission.INTERNET' "$MANIFEST"; then
             sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\n    <application#' "$MANIFEST"
           fi
-
           sed -i 's#android:label="[^"]*"#android:label="双线股票分析"#' "$MANIFEST"
 
       - name: Install Flutter dependencies
         working-directory: app
         run: flutter pub get
-
-      # Deliberately do not run flutter analyze.
-      # The generated/sample test/widget_test.dart has stale template imports.
 
       - name: Build release APK
         working-directory: app
@@ -103,7 +91,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: dual-stock-chart-v1.5.2-apk
+          name: dual-stock-chart-v1.6.0-apk
           path: app/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
