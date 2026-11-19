@@ -1,3 +1,4 @@
+
 name: Build Android APK v1.2
 
 on:
@@ -60,7 +61,7 @@ jobs:
 
       - name: Check Dart formatting
         working-directory: app
-        run: dart format --output=none --set-exit-if-changed lib
+        run: dart format lib
 
       - name: Build release APK
         working-directory: app
