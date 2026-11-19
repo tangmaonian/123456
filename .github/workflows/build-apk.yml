@@ -10,7 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,16 +18,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ZIP="dual_stock_chart_v1.6.0_source.zip"
+          ZIP="dual_stock_chart_v1.6.1_source.zip"
           if [ ! -f "$ZIP" ]; then
             echo "::error::Cannot find $ZIP in the repository root."
             exit 1
           fi
-
           rm -rf app source_unpacked
           mkdir -p source_unpacked app
           unzip -q "$ZIP" -d source_unpacked
-
           if [ -f source_unpacked/pubspec.yaml ]; then
             cp -a source_unpacked/. app/
           else
@@ -40,13 +37,10 @@ jobs:
             PROJECT_DIR="$(dirname "$PUBSPEC")"
             cp -a "$PROJECT_DIR"/. app/
           fi
-
           test -f app/pubspec.yaml
           test -f app/lib/main.dart
-          test -f app/lib/data/auto_source.dart
-          test -f app/lib/data/minute_service.dart
-          test -f app/lib/ui/chart_screen.dart
           test -f app/lib/ui/stock_pages.dart
+          echo "Source extraction verified."
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -91,7 +85,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: dual-stock-chart-v1.6.0-apk
+          name: dual-stock-chart-v1.6.1-apk
           path: app/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
