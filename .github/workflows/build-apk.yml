@@ -1,5 +1,5 @@
 
-name: Build Android APK
+name: Build Android APK v1.0
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Find and extract latest source ZIP
         run: |
-          set -e
+          set -euo pipefail
           ZIP=$(find . -maxdepth 1 -type f -name 'dual_stock_chart_v*_source.zip' | sort -V | tail -n 1)
           if [ -z "$ZIP" ]; then
             echo "找不到 dual_stock_chart_v*_source.zip，请把源码 ZIP 上传到仓库根目录。"
@@ -25,8 +25,8 @@ jobs:
           mkdir -p app
           unzip -q "$ZIP" -d app
           test -f app/pubspec.yaml
-          test -d app/lib
-          echo "Source files extracted successfully."
+          test -f app/lib/main.dart
+          test -f app/lib/ui/stock_pages.dart
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -64,7 +64,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dual-stock-chart-v0.9-android-apk
+          name: dual-stock-chart-v1.0-android-apk
           path: app/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
