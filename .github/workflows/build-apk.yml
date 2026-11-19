@@ -1,5 +1,4 @@
-
-name: Build Android APK v1.1
+name: Build Android APK v1.2
 
 on:
   workflow_dispatch:
@@ -13,12 +12,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Find and extract v1.1 source ZIP
+      - name: Find and extract v1.2 source ZIP
         run: |
           set -euo pipefail
-          ZIP=$(find . -maxdepth 1 -type f -name 'dual_stock_chart_v1.1_source.zip' | head -n 1)
+          ZIP=$(find . -maxdepth 1 -type f -name 'dual_stock_chart_v1.2_source.zip' | head -n 1)
           if [ -z "$ZIP" ]; then
-            echo "找不到 dual_stock_chart_v1.1_source.zip，请将源码 ZIP 上传到仓库根目录。"
+            echo "找不到 dual_stock_chart_v1.2_source.zip，请先上传到仓库根目录。"
             exit 1
           fi
           echo "Using source archive: $ZIP"
@@ -26,6 +25,7 @@ jobs:
           unzip -q "$ZIP" -d app
           test -f app/pubspec.yaml
           test -f app/lib/main.dart
+          test -f app/lib/ui/chart_screen.dart
           test -f app/lib/ui/stock_pages.dart
 
       - name: Set up Java
@@ -58,6 +58,10 @@ jobs:
         working-directory: app
         run: flutter pub get
 
+      - name: Check Dart formatting
+        working-directory: app
+        run: dart format --output=none --set-exit-if-changed lib
+
       - name: Build release APK
         working-directory: app
         run: flutter build apk --release
@@ -65,7 +69,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dual-stock-chart-v1.1-android-apk
+          name: dual-stock-chart-v1.2-android-apk
           path: app/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
