@@ -18,7 +18,7 @@ jobs:
           set -euo pipefail
           ZIP=$(find . -maxdepth 1 -type f -name 'dual_stock_chart_v*_source.zip' | sort -V | tail -n 1)
           if [ -z "$ZIP" ]; then
-            echo "找不到 dual_stock_chart_v*_source.zip，请把源码 ZIP 上传到仓库根目录。"
+            echo "找不到 dual_stock_chart_v*_source.zip"
             exit 1
           fi
           echo "Using source archive: $ZIP"
@@ -49,13 +49,26 @@ jobs:
         run: |
           MANIFEST=android/app/src/main/AndroidManifest.xml
           if ! grep -q 'android.permission.INTERNET' "$MANIFEST"; then
-            sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\n    <application#' "$MANIFEST"
+            sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\
+              <application#' "$MANIFEST"
           fi
           sed -i 's#android:label="[^"]*"#android:label="双线股票分析"#' "$MANIFEST"
 
       - name: Install Flutter dependencies
         working-directory: app
         run: flutter pub get
+
+      - name: Diagnose Dart compile error
+        working-directory: app
+        run: |
+          echo "===== stock_pages.dart lines 230-255 ====="
+          nl -ba lib/ui/stock_pages.dart | sed -n '230,255p'
+
+          echo "===== MinutePoint definitions and usages ====="
+          grep -R -n -E --include='*.dart' 'class MinutePoint|MinutePoint\(' lib || true
+
+          echo "===== price average volume declarations ====="
+          grep -n -E 'price|average|volume' lib/ui/stock_pages.dart | head -n 100 || true
 
       - name: Build release APK
         working-directory: app
