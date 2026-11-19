@@ -1,4 +1,5 @@
 name: Build Android APK
+
 on:
   workflow_dispatch:
   push:
@@ -16,7 +17,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ZIP="dual_stock_chart_v1.6.7_landscape_layout_source.zip"
+          ZIP="dual_stock_chart_v1.6.9_source.zip"
           if [ ! -f "$ZIP" ]; then
             ZIP="$(find . -maxdepth 1 -type f -name 'dual_stock_chart*_source.zip' | sort -V | tail -n 1)"
           fi
@@ -79,7 +80,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: dual-stock-chart-v1.6.7-apk
+          name: dual-stock-chart-v1.6.9-apk
           path: app/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
