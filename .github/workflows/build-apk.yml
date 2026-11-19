@@ -70,6 +70,39 @@ jobs:
           echo "===== price average volume declarations ====="
           grep -n -E 'price|average|volume' lib/ui/stock_pages.dart | head -n 100 || true
 
+      - name: Fix MinutePoint volume type
+        working-directory: app
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path("lib/ui/stock_pages.dart")
+          source = path.read_text(encoding="utf-8")
+
+          pattern = (
+              r"final\s+volume\s*=\s*"
+              r"fields\.length\s*>\s*3\s*\?\s*"
+              r"\(double\.tryParse\(fields\[3\]\)\s*\?\?\s*0\)"
+              r"\s*:\s*0\s*;"
+          )
+
+          replacement = (
+              "final volume = fields.length > 3 ? "
+              "(double.tryParse(fields[3]) ?? 0.0) : 0.0;"
+          )
+
+          updated, count = re.subn(pattern, replacement, source)
+
+          if count != 1:
+              print(f"错误：预期修正1处，实际匹配到{count}处。")
+              print("请检查 stock_pages.dart 中的 volume 声明。")
+              raise SystemExit(1)
+
+          path.write_text(updated, encoding="utf-8")
+          print("成功：已将 volume 的默认值修正为 double 类型 0.0。")
+          PY
+
       - name: Build release APK
         working-directory: app
         run: flutter build apk --release
