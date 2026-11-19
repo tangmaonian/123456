@@ -17,7 +17,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ZIP="dual_stock_chart_v1.6.4_source.zip"
+          ZIP="dual_stock_chart_v1.6.5_source.zip"
           test -f "$ZIP" || { echo "::error::Cannot find $ZIP"; exit 1; }
           rm -rf app source_unpacked
           mkdir -p app source_unpacked
@@ -76,7 +76,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: dual-stock-chart-v1.6.4-apk
+          name: dual-stock-chart-v1.6.5-apk
           path: app/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 30
