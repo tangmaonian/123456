@@ -1,187 +1,109 @@
-# 双线股票分析 自选股（每行：代码,名称）
-sz399006,创业板指
-399006.sz,创业指
-sz300001,特锐德
-sz002902,铭普光磁
-sh600703,三安光电
-sz000338,潍柴动力
-sh601628,中国人寿
-sh600030,中信证券
-sz002594,比亚迪
-sh600031,三一重工
-us.IXIC,纳斯达克综合
-us.DJI,道琼斯
-hkHSI,恒生指数
-hkHSTECH,恒生科技指数
-usCLS.N,天弘科技
-usGOOG.OQ,谷歌c
-usAVGO.OQ,博通
-usNVDA.OQ,英伟达
-usMETA.OQ,metaplatforms
-usAPH.N,安费诺
-yh^BVSP,巴西圣保罗BOVESPA
-yh^BSESN,印度SENSEX
-yh^FCHI,法国CAC40
-yh^GDAXI,德国DAX
-yh^KS11,韩国综合指数
-yh^TWII,台湾加权指数
-yh^N225,日经225（日本）
-usNVDA,NVIDIA Corporation
-sh600406,国电南瑞
-sh601179,中国西电
-sh688676,金盘科技
-sz300693,盛弘股份
-sh000688,科创50
-sz002428,云南锗业
-hk01879,曦智科技p
-hk02513,智谱
-sz000333,美的集团
-hk00700,腾讯控股
-usTEL.N,泰科电子
-usAAPL.OQ,apple inc
-usTSM.N,台积电
-usAA.N,美国铝业公司
-usMSFT.OQ,微软
-sh688825,长鑫科技
-sh600519,贵州茅台
-sz002032,苏泊尔
-sz000625,长安汽车
-sh601633,长城汽车
-sz000157,中联重科
-sh601012,隆基绿能
-sh601601,中国太保
-sh601318,中国平安
-sz300059,东方财富
-sh601066,中信建投
-sh600036,招商银行
-sh600000,浦发银行
-sh601390,中国中铁
-sh601186,中国铁建
-sh601766,中国中车
-sh601668,中国建筑
-sh601857,中国石油
-sh600028,中国石化
-sz000933,神火股份
-sh600348,华阳股份
-sh600971,恒源煤电
-sz000630,铜陵有色
-sz000751,锌业股份
-sh601600,中国铝业
-sz000762,西藏矿业
-sz002460,赣锋锂业
-sz002466,天齐锂业
-sh603505,金石资源
-sz300618,寒锐钴业
-sh600887,伊利股份
-sh600882,妙可蓝多
-sz002507,涪陵榨菜
-sh600436,片仔癀
-sh600196,复星医药
-sh600511,国药股份
-sh603039,泛微网络
-sz002709,天赐材料
-sz002920,德赛西威
-sz300496,中科创达
-sh603026,石大胜华
-sh603169,兰石重装
-sz002230,科大讯飞
-sh600895,张江高科
-sh600839,四川长虹
-sz002281,光迅科技
-sh600171,上海贝岭
-sz000858,五粮液
-sh600584,长电科技
-sz301308,江波龙
-sz300782,卓胜微
-sh603501,豪威集团
-sh601216,君正集团
-sh603596,伯特利
-sh600699,均胜电子
-sz300552,万集科技
-sz000049,德赛电池
-sh603259,药明康德
-sz002218,拓日新能
-sh600127,金健米业
-sh600598,北大荒
-sz300750,宁德时代
-sz002475,立讯精密
-sz002456,欧菲光
-sz002241,歌尔股份
-sh603160,汇顶科技
-sz002276,万马股份
-sh601231,环旭电子
-sh688981,中芯国际
-sh688187,时代电气
-sz300073,当升科技
-sh600580,卧龙电驱
-sz002881,美格智能
-sh688521,芯原股份
-sh688303,大全能源
-sh603799,华友钴业
-sz300319,麦捷科技
-sz002138,顺络电子
-sz300857,协创数据
-sh603662,柯力传感
-sh603728,鸣志电器
-sh688234,天岳先进
-sh688313,仕佳光子
-sh688195,腾景科技
-sh688012,中微公司
-sh688037,芯源微
-sh688702,盛科通信U
-sh688027,国盾量子
-sh688256,寒武纪
-sh688498,源杰科技
-sh688017,绿的谐波
-sh688048,长光华芯
-sh688525,佰维存储
-sh688120,华海清科
-sz002371,北方华创
-sh688072,拓荆科技
-sz000917,电广传媒
-sz300476,胜宏科技
-sz301165,锐捷网络
-sz002396,星网锐捷
-hk02097,蜜雪集团
-sh601127,赛力斯
-sh600418,江淮汽车
-sz300474,景嘉微
-sz000400,许继电气
-sz002028,思源电气
-sz300274,阳光电源
-sh600105,永鼎股份
-sz000568,泸州老窖
-sz000062,深圳华强
-sh600550,保变电气
-sh600106,重庆路桥
-usNIO,NIO Inc.
-usXPEV,XPeng Inc.
-usBIDU,Baidu, Inc.
-usCRM,Salesforce, Inc.
-usVZ,Verizon Communications Inc.
-usQCOM,QUALCOMM Incorporated
-usCLS,Celestica, Inc.
-usAMZN,Amazon.com, Inc.
-usAVGO,Broadcom Inc.
-usMSFT,Microsoft Corporation
-usMRVL,Marvell Technology, Inc.
-usAPH,Amphenol Corporation
-usSTX,Seagate Technology Holdings PLC
-usMU,Micron Technology, Inc.
-usSMCI,Super Micro Computer, Inc.
-usCOHR,Coherent Corp.
-usLITE,Lumentum Holdings Inc.
-usAAOI,Applied Optoelectronics, Inc.
-sz002222,福晶科技
-sz300394,天孚通信
-sz300620,光库科技
-sz002837,英维克
-sz300502,新易盛
-sz300308,中际旭创
-sz301626,苏州天脉
-sz301205,联特科技
-sh603893,瑞芯微
-sh688400,凌云光
-sh688685,迈信林
-sh688662,富信科技
-sz002747,埃斯顿
+
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Upload this ZIP to the repository root.
+      - name: Extract Flutter source ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ZIP="dual_stock_chart_v1.5.2_source.zip"
+
+          if [ ! -f "$ZIP" ]; then
+            echo "::error::Cannot find $ZIP in the repository root."
+            exit 1
+          fi
+
+          rm -rf app source_unpacked
+          mkdir -p source_unpacked
+          unzip -q "$ZIP" -d source_unpacked
+
+          if [ -f source_unpacked/pubspec.yaml ]; then
+            mkdir -p app
+            cp -a source_unpacked/. app/
+          else
+            PUBSPEC="$(find source_unpacked -mindepth 2 -maxdepth 4 -type f -name pubspec.yaml | head -n 1)"
+            if [ -z "$PUBSPEC" ]; then
+              echo "::error::pubspec.yaml was not found inside the ZIP."
+              find source_unpacked -maxdepth 4 -type f | head -100
+              exit 1
+            fi
+            PROJECT_DIR="$(dirname "$PUBSPEC")"
+            mkdir -p app
+            cp -a "$PROJECT_DIR"/. app/
+          fi
+
+          echo "Flutter project files:"
+          ls -la app
+
+          test -f app/pubspec.yaml
+          test -f app/lib/main.dart
+          test -f app/lib/ui/search_sheet.dart
+          test -f app/lib/ui/stock_pages.dart
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Generate Android platform files
+        working-directory: app
+        run: flutter create . --platforms=android --project-name dual_stock_chart --org com.dualstock
+
+      - name: Configure Android manifest
+        working-directory: app
+        shell: bash
+        run: |
+          set -euo pipefail
+          MANIFEST="android/app/src/main/AndroidManifest.xml"
+
+          if ! grep -q 'android.permission.INTERNET' "$MANIFEST"; then
+            sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\n    <application#' "$MANIFEST"
+          fi
+
+          sed -i 's#android:label="[^"]*"#android:label="双线股票分析"#' "$MANIFEST"
+
+      - name: Install Flutter dependencies
+        working-directory: app
+        run: flutter pub get
+
+      # Deliberately do not run flutter analyze.
+      # The generated/sample test/widget_test.dart has stale template imports.
+
+      - name: Build release APK
+        working-directory: app
+        run: flutter build apk --release
+
+      - name: Verify APK exists
+        run: |
+          test -f app/build/app/outputs/flutter-apk/app-release.apk
+          ls -lh app/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: dual-stock-chart-v1.5.2-apk
+          path: app/build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 30
